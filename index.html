@@ -2,21 +2,33 @@
 <html>
 
 <head>
+
 <meta charset="UTF-8">
-<title>Runner Game</title>
+
+<title>Orb Runner</title>
+
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#6ec6ff">
 
 <style>
 
 body{
+
 margin:0;
+
 overflow:hidden;
+
 font-family:Arial;
+
 background:#222;
+
 }
 
 #game{
 
 width:100vw;
+
 height:100vh;
 
 position:relative;
@@ -24,9 +36,13 @@ position:relative;
 overflow:hidden;
 
 background:
+
 linear-gradient(
+
 #6ec6ff,
+
 #dff6ff
+
 );
 
 }
@@ -34,6 +50,7 @@ linear-gradient(
 #player{
 
 width:50px;
+
 height:50px;
 
 background:red;
@@ -45,6 +62,7 @@ bottom:60px;
 left:50%;
 
 transform:
+
 translateX(-50%);
 
 border-radius:12px;
@@ -56,6 +74,7 @@ display:none;
 .obstacle{
 
 width:60px;
+
 height:60px;
 
 background:black;
@@ -71,6 +90,7 @@ border-radius:12px;
 .orb{
 
 width:30px;
+
 height:30px;
 
 background:gold;
@@ -88,6 +108,7 @@ border-radius:50%;
 position:absolute;
 
 top:10px;
+
 left:10px;
 
 font-size:28px;
@@ -105,6 +126,7 @@ display:none;
 position:absolute;
 
 width:100%;
+
 height:100%;
 
 display:flex;
@@ -161,17 +183,37 @@ Score: 0
 
 <script>
 
-const game =
-document.getElementById("game");
+const game=
 
-const player =
-document.getElementById("player");
+document.getElementById(
 
-const scoreText =
-document.getElementById("score");
+"game"
 
-const menu =
-document.getElementById("menu");
+);
+
+const player=
+
+document.getElementById(
+
+"player"
+
+);
+
+const scoreText=
+
+document.getElementById(
+
+"score"
+
+);
+
+const menu=
+
+document.getElementById(
+
+"menu"
+
+);
 
 let started=false;
 
@@ -183,46 +225,52 @@ let obstacleSpeed=7;
 
 let orbSpeed=6;
 
-
-
 document.addEventListener(
+
 "mousemove",
+
 (e)=>{
 
 if(started){
 
 player.style.left=
+
 e.clientX+"px";
 
 }
 
 }
+
 );
 
-
-
 document.addEventListener(
+
 "touchmove",
+
 (e)=>{
 
 if(started){
 
 player.style.left=
-e.touches[0].clientX+"px";
+
+e.touches[0].clientX
+
++"px";
 
 }
 
 }
+
 );
-
-
 
 function collision(a,b){
 
 let p=
+
 a.getBoundingClientRect();
 
 let o=
+
 b.getBoundingClientRect();
 
 return !(
@@ -239,23 +287,29 @@ p.top>o.bottom
 
 }
 
-
-
 function obstacle(){
 
 if(gameOver)return;
 
 let x=
-document.createElement("div");
+
+document.createElement(
+
+"div"
+
+);
 
 x.className=
+
 "obstacle";
 
 x.style.left=
 
 Math.random()
 
-*(window.innerWidth-60)
+*
+
+(window.innerWidth-60)
 
 +"px";
 
@@ -264,6 +318,7 @@ game.appendChild(x);
 let y=-80;
 
 let move=
+
 setInterval(()=>{
 
 if(gameOver){
@@ -279,18 +334,27 @@ return;
 y+=obstacleSpeed;
 
 x.style.top=
+
 y+"px";
 
 if(
+
 collision(player,x)
-&& !gameOver
+
+&&
+
+!gameOver
+
 ){
 
 gameOver=true;
 
 alert(
+
 "Game Over\nScore: "
+
 +score
+
 );
 
 location.reload();
@@ -298,7 +362,11 @@ location.reload();
 }
 
 if(
-y>window.innerHeight
+
+y>
+
+window.innerHeight
+
 ){
 
 x.remove();
@@ -311,23 +379,27 @@ clearInterval(move);
 
 }
 
-
-
 function orb(){
 
 if(gameOver)return;
 
 let x=
-document.createElement("div");
 
-x.className=
-"orb";
+document.createElement(
+
+"div"
+
+);
+
+x.className="orb";
 
 x.style.left=
 
 Math.random()
 
-*(window.innerWidth-30)
+*
+
+(window.innerWidth-30)
 
 +"px";
 
@@ -336,6 +408,7 @@ game.appendChild(x);
 let y=-40;
 
 let move=
+
 setInterval(()=>{
 
 if(gameOver){
@@ -351,16 +424,21 @@ return;
 y+=orbSpeed;
 
 x.style.top=
+
 y+"px";
 
 if(
+
 collision(player,x)
+
 ){
 
 score++;
 
 if(
+
 score%50===0
+
 ){
 
 obstacleSpeed+=2;
@@ -372,6 +450,7 @@ orbSpeed+=1;
 scoreText.innerHTML=
 
 "Score: "
+
 +score;
 
 x.remove();
@@ -381,7 +460,11 @@ clearInterval(move);
 }
 
 if(
-y>window.innerHeight
+
+y>
+
+window.innerHeight
+
 ){
 
 x.remove();
@@ -394,29 +477,36 @@ clearInterval(move);
 
 }
 
-
-
 function startGame(){
 
 started=true;
 
 menu.style.display=
+
 "none";
 
 player.style.display=
+
 "block";
 
 scoreText.style.display=
+
 "block";
 
 setInterval(
+
 obstacle,
+
 1200
+
 );
 
 setInterval(
+
 orb,
+
 700
+
 );
 
 }
