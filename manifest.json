@@ -1,0 +1,8 @@
+{
+"name":"Orb Runner",
+"short_name":"OrbRunner",
+"start_url":"./",
+"display":"standalone",
+"background_color":"#6ec6ff",
+"theme_color":"#6ec6ff"
+}
